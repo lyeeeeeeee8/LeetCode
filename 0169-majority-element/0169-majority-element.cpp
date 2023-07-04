@@ -2,15 +2,16 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) 
     {
-        map<int,int> counter;
-        int goal = nums.size() / 2, num;
-        for(int i=0; i<nums.size(); i++)
+        int count = 0, candidate = 0;
+        for(int num : nums)
         {
-            num = nums[i];
-            counter[num]++;
-            if(counter[num] > goal)
-                return num;
+            if(count == 0) 
+                candidate = num;
+            if(num == candidate)
+                count++;
+            else
+                count--;
         }
-        return 0;
+        return candidate;
     }
 };

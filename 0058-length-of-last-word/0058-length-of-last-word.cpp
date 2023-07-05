@@ -6,10 +6,7 @@ public:
         stringstream input(s);
         string word;
         while(input >> word)
-        {
             words.push_back(word);
-            cout << word << endl;
-        }
         return word.length();
     }
 };

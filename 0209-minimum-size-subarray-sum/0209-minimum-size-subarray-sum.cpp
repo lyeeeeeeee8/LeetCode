@@ -7,16 +7,11 @@ public:
         {
             sum += nums[i];
             R = i;
-            if(sum >= target)
+            while(sum >= target)
             {
                 res = min(res, R - L + 1);
-                while(sum > target)
-                {
-                    sum -= nums[L];
-                    L++;
-                    if(sum >= target)
-                        res = min(res, R- L + 1);
-                }
+                sum -= nums[L];
+                L++;
             }
         }
         return res != INT_MAX ? res : 0;

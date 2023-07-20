@@ -1,34 +1,27 @@
 class Solution {
 public:
-    vector<int> asteroidCollision(vector<int>& ast) 
+    vector<int> asteroidCollision(vector<int>& asts) 
     {
-        bool collision = 1;
-        int cnt = 0, size;
-        if(ast.size() == 0) return ast;
-        while(collision)
+        bool destroy;
+        vector<int> res;
+        for(int ast : asts)
         {
-            cnt = 0;
-            for(int i=1; i<ast.size(); i++)
+            destroy = false;
+            while(res.size() && res.back() > 0 && ast < 0 && !destroy)
             {
-                size = ast.size();
-                if(ast[i-1] > 0 && ast[i] < 0) //colide
-                {
-                    if(abs(ast[i-1]) == abs(ast[i]))
-                    {
-                        ast.erase(ast.begin() + i);
-                        ast.erase(ast.begin() + (i - 1));
-                    }
-                    else if(abs(ast[i-1]) > abs(ast[i]))
-                        ast.erase(ast.begin() + i);
-                    else
-                        ast.erase(ast.begin() + (i - 1));
-                }
+                if(res.back() > abs(ast)) 
+                    destroy = true;
+                else if(res.back() < abs(ast))
+                    res.pop_back();
                 else
-                    cnt++;
+                {
+                    destroy = true;
+                    res.pop_back();
+                }
             }
-            if(cnt == size - 1|| ast.size() == 0 || ast.size() == 1)
-                collision = 0;
+            if(destroy == false) 
+                res.push_back(ast);
         }
-        return ast;
+        return res;
     }
 };

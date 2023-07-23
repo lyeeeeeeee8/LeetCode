@@ -2,14 +2,16 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) 
     {
-        map<int,int> dict;
-        for(int i=0; i<numbers.size(); i++)
+        int L = 0, R = numbers.size() - 1;
+        while(L < R)
         {
-            if(dict.count(target - numbers[i]) == 0)
-                dict[numbers[i]] = i;
+            if(numbers[L] + numbers[R] == target)
+                return {L+1, R+1};
+            else if(numbers[L] + numbers[R] < target)
+                L++;
             else
-                return {dict[target - numbers[i]]+1, i+1};
+                R--;
         }
-        return {0, 0};
+        return {};
     }
 };

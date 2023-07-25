@@ -6,7 +6,6 @@ public:
         int h, max_water = 0;
         while(L < R)
         {
-            cout << height[L] << "  " << height[R] << endl;
             h = min(height[L], height[R]);
             max_water = max(h * (R - L), max_water);
             while(height[L] <= h && L < R) L++;

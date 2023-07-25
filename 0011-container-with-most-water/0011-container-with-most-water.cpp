@@ -3,15 +3,14 @@ public:
     int maxArea(vector<int>& height) 
     {
         int L = 0, R = height.size() - 1;
-        int water, max_water = 0;
+        int h, max_water = 0;
         while(L < R)
         {
-            water = min(height[L], height[R]) * (R - L);
-            max_water = max(water, max_water);
-            if(height[L] > height[R])
-                R--;
-            else
-                L++;
+            cout << height[L] << "  " << height[R] << endl;
+            h = min(height[L], height[R]);
+            max_water = max(h * (R - L), max_water);
+            while(height[L] <= h && L < R) L++;
+            while(height[R] <= h && L < R) R--;
         }
         return max_water;
     }

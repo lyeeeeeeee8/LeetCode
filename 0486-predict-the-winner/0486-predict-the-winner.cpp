@@ -3,6 +3,7 @@ public:
     int Score(vector<int>&nums, int i, int j)
     {
         if(i > j) return 0;
+        if(i == j) return nums[i];
         int score = max(nums[i] + min(Score(nums, i+2, j), Score(nums, i+1, j-1)),
                         nums[j] + min(Score(nums, i+1, j-1), Score(nums, i, j-2)));
         return score;

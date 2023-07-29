@@ -3,26 +3,34 @@ public:
     string simplifyPath(string path) 
     {
         stack<string> st;
-        stringstream ss(path);
-        string tmp, res;
-        while(getline(ss, tmp, '/'))
+        string tmp, res = "";
+        for(int i=0; i<path.size(); i++)
         {
-            if(tmp == "" || tmp == ".") continue;
-            if(tmp == "..") 
+            tmp = "";
+            if(path[i] == '/') 
+                continue;
+            while(i < path.size() && path[i] != '/')
             {
-                if(!st.empty()) st.pop();
-                else continue;
+                tmp += path[i];
+                i++;
             }
-            else st.push(tmp);
+            if(tmp == ".") 
+                continue;
+            else if(tmp == "..")
+            {
+                if(!st.empty())
+                    st.pop();
+            }
+            else    
+                st.push(tmp);
         }
         while(!st.empty())
         {
-            res = st.top() + "/" + res;
+            res = "/" + st.top() + res;
             st.pop();
         }
-        res = "/" + res;
-        if(res != "/")
-            res.erase(res.begin() + res.size() - 1);
+        if(res == "")
+            res = "/";
         return res;
     }
 };

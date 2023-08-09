@@ -5,7 +5,7 @@ public:
         sort(nums.begin(), nums.end());
         int L = 0, R = nums[nums.size() - 1] - nums[0], M;
         int pairs = 0;
-        while(L < R)
+        while(L <= R)
         {
             M = L + (R - L) / 2;
             pairs = 0;
@@ -18,7 +18,7 @@ public:
                 }
             }
             if(pairs >= p)
-                R = M;
+                R = M - 1;
             else
                 L = M + 1;
         }
